@@ -235,8 +235,8 @@ int DMP::getAttitude()
     //swapped to match Yaw,Pitch,Roll
     //Scaled from deg/s to get tr/s
      for (int i=0;i<DIM;i++){
-       gyro[i]   = (float)(g[DIM-i-1])/131.0/360.0;
-     }
+       gyro[i]   = (float)(g[DIM-i-1])/131.0/360.0; // the out put will be between -0.7 and 0.7
+      }
 
     // printf("gyro  %7.2f %7.2f %7.2f    \n", (float)g[0]/131.0,
     // 	   (float)g[1]/131.0,
