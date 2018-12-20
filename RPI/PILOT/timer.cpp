@@ -262,7 +262,7 @@ void TimerClass::sig_handler_(int signum)
   // 	 imu.ypr[ROLL],
   // 	 PIDout[ROLL]);
 
-  // PID for Yaw Pitch Roll with input [-60 +60] and gyro us value ????
+  // PID for Yaw Pitch Roll with input [-60 +60] and gyro us value ???? (-0.7 +0.7)
   for (int i=0;i<DIM;i++){
     PIDout[i] =
       yprRATE[i].update_pid_std(PIDout[i],
