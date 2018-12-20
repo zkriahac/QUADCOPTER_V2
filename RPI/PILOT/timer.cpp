@@ -176,7 +176,7 @@ void TimerClass::sig_handler_(int signum)
   	  << RCinput[2] << " " << RCinput[3] << " ";
 
 
-  // //convert into PID usable values
+  // //convert into PID usable values -------------------------------------------------------------------------------->>>
   RCinput[0] = (RCinput[0] - THR_MIN)/(THR_MAX-THR_MIN) * 100.0;
   RCinput[1] = -(RCinput[1] -(RC_MAX+RC_MIN)/2.) /
     (RC_MAX-RC_MIN) * K_YAW;
@@ -241,10 +241,10 @@ void TimerClass::sig_handler_(int signum)
   //4-1 Calculate PID on attitude
   #ifdef PID_STAB
 
-  for (int i=1;i<DIM;i++){
+  for (int i=1;i<DIM;i++){ 
 
     //yprSTAB[i].updateKpKi(RCinput[i+1],imu.ypr[i]);
-
+    // First PID for Roll and Pitch with  input angle (-60 +60) and Angle Now (-90 +90) -------------------------->>>
     PIDout[i] =
       yprSTAB[i].update_pid_std(RCinput[i+1],
   			    imu.ypr[i],
@@ -262,6 +262,7 @@ void TimerClass::sig_handler_(int signum)
   // 	 imu.ypr[ROLL],
   // 	 PIDout[ROLL]);
 
+  // PID for Yaw Pitch Roll with input [-60 +60] and gyro us value ????
   for (int i=0;i<DIM;i++){
     PIDout[i] =
       yprRATE[i].update_pid_std(PIDout[i],
@@ -289,8 +290,8 @@ void TimerClass::sig_handler_(int signum)
   for (int i=0;i<DIM;i++){
     PIDout[i] =
       yprRATE[i].update_pid_std(RCinput[i+1],
-      			    imu.gyro[i],
-      			    Timer.dt);
+      			    	imu.gyro[i],
+      			    	Timer.dt);
   }
   //printf("%7.2f  %7.2f\n",imu.gyro[PITCH],Timer.PIDout[PITCH]);
   #endif
